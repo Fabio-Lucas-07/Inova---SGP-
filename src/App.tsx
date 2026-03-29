@@ -6,6 +6,10 @@ import './App.css'
 import { Route ,BrowserRouter,Routes  } from 'react-router-dom'
 import Home from './pages/Home.tsx'
 import Navbar from './components/Navbar.tsx'
+import Login from './pages/Login.tsx'
+import Prontuários from './pages/Prontuários.tsx'
+import Clientes from './pages/Clientes.tsx'
+import  Layout  from './components/Layout.tsx'
 
 
 function App() {
@@ -14,8 +18,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Navbar/>}>
+        <Route path="/login" element={<Login/>}/>
+        <Route element={<Layout/>}>
           <Route path="/" element={<Home/>}/>
+          <Route path="/clientes" element={<Clientes/>}/>
+          <Route path="/prontuarios" element={<Prontuários/>}/>
         </Route>
         
       </Routes>

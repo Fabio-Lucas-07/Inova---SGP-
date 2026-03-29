@@ -11,32 +11,68 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from '@/components/ui/button'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+    const navigate = useNavigate()
+
     return (
         //desktop
-        <div className='flex fixed w-full h-15 bg-[#261810] items-center justify-center px-4  text-white'>
+        <div className='flex fixed w-full h-15 bg-[#261810] items-center justify-center px-4  text-white '>
             <div className=' grid grid-cols-3 gap-4 w-full mr-auto ml-auto flex place-items-center p-4'>
                 <h1 className='mr-auto'>Gerenciamento de Prontuários</h1>
                 <ul className='flex gap-3'>
-                    <li className='hover:cursor-pointer rounded-md hover:bg-white/10 p-2 transition-all duration-300'>Inicio</li>
-                    <li className='hover:cursor-pointer rounded-md hover:bg-white/10 p-2 transition-all duration-300'>Meus Clientes</li>
-                    <li className='hover:cursor-pointer rounded-md hover:bg-white/10 p-2 transition-all duration-300'>Prontuários</li>
+                    <li>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 ' : ''}`
+                            }
+                        >
+                            Início
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/clientes"
+                            className={({ isActive }) =>
+                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 ' : ''}`
+                            }
+                        >
+                            Meus Clientes
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/prontuarios"
+                            className={({ isActive }) =>
+                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 ' : ''}`
+                            }
+                        >
+                            Prontuários
+                        </NavLink>
+                    </li>
                 </ul>
                 <div className='ml-auto'>
-                    
+
                     <AlertDialog >
                         <AlertDialogTrigger asChild>
-                            <Button className='hover:cursor-pointer bg-transparent border-none rounded-md hover:bg-white/10 p-2 transition-all duration-300 ' variant="outline">Sair</Button>
+                            <Button className='text-[15px] font-normal hover:cursor-pointer bg-transparent border-none rounded-md hover:bg-white/10 p-2 transition-all duration-300 '>Sair</Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Você deseja mesmo sair?</AlertDialogTitle>
-                                
+
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                                 <AlertDialogCancel>Não</AlertDialogCancel>
-                                <AlertDialogAction>Sim</AlertDialogAction>
+                                <AlertDialogAction
+                                    onClick={() => {
+                                        navigate('/login')
+                                    }}
+                                >
+                                    Sim
+                                </AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>
@@ -44,6 +80,9 @@ const Navbar = () => {
             </div>
 
         </div>
+
+
+
     )
 }
 
