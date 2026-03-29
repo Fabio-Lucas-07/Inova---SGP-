@@ -123,7 +123,7 @@
     font-family: "Poppins", sans-serif;
     }
   body {
-    @apply bg-[#F9F7EE] text-foreground;
+    @apply bg-[#FAF4EE] text-foreground;
     }
   html {
     @apply font-sans ;

@@ -12,16 +12,18 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from '@/components/ui/button'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { Menu } from 'lucide-react';
 
 const Navbar = () => {
     const navigate = useNavigate()
 
     return (
-        //desktop
-        <div className='flex fixed w-full h-15 bg-[#261810] items-center justify-center px-4  text-white '>
-            <div className=' grid grid-cols-3 gap-4 w-full mr-auto ml-auto flex place-items-center p-4'>
-                <h1 className='mr-auto'>Gerenciamento de Prontuários</h1>
-                <ul className='flex gap-3'>
+        
+        <div className='flex  sticky top-0  w-full h-15 bg-[#261810] items-center justify-center px-4  text-white '>
+            {/* //desktop */}
+            <div className=' grid grid-cols-3 gap-4 w-full mr-auto ml-auto flex place-items-center p-4 hidden md:flex'>
+                <h1 className='justify-start w-full'>Gerenciamento de Prontuários</h1>
+                <ul className='flex gap-3 w-full items-center justify-center'>
                     <li>
                         <NavLink
                             to="/"
@@ -53,11 +55,11 @@ const Navbar = () => {
                         </NavLink>
                     </li>
                 </ul>
-                <div className='ml-auto'>
+                <div className='w-full flex justify-end'>
 
                     <AlertDialog >
                         <AlertDialogTrigger asChild>
-                            <Button className='text-[15px] font-normal hover:cursor-pointer bg-transparent border-none rounded-md hover:bg-white/10 p-2 transition-all duration-300 '>Sair</Button>
+                            <Button className='text-[15px] font-normal hover:cursor-pointer bg-transparent border-none rounded-md hover:bg-white/10 p-2 transition-all duration-300'>Sair</Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                             <AlertDialogHeader>
@@ -77,6 +79,10 @@ const Navbar = () => {
                         </AlertDialogContent>
                     </AlertDialog>
                 </div>
+            </div>
+            {/* //mobile */}
+            <div>
+
             </div>
 
         </div>

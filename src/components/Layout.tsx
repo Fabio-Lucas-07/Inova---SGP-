@@ -6,13 +6,13 @@ import NavBar from './Navbar';
 
 const Layout = () => {
   return (
-    <div>
-        <NavBar />
-      <main>
-        <Outlet/>
+    <div className="flex flex-col">
+      <NavBar />
+      <main >
+        <Outlet />
       </main>
     </div>
-  );
+  );  
 };
 
 export default Layout;
