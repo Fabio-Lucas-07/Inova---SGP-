@@ -19,7 +19,7 @@ const Navbar = () => {
 
     return (
         
-        <div className='flex  sticky top-0  w-full h-15 bg-[#261810] items-center justify-center px-4  text-white '>
+        <div className='flex sticky top-0 z-50 w-full h-15 bg-[#261810] items-center justify-center px-4  text-white '>
             {/* //desktop */}
             <div className=' grid grid-cols-3 gap-4 w-full mr-auto ml-auto flex place-items-center p-4 hidden md:flex'>
                 <h1 className='justify-start w-full'>Gerenciamento de Prontuários</h1>

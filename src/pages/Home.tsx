@@ -2,6 +2,8 @@ import React from 'react'
 import { Button } from '../components/ui/button'
 import { Card, CardHeader, CardContent } from '../components/ui/card'
 import { Plus } from 'lucide-react'
+import Calendar from '../components/calendario/Calendario.tsx'
+
 
 
 
@@ -24,13 +26,13 @@ const Home = () => {
             </div>
           </div>
 
-          <div className='flex flex-row'>
+          <div className='flex grid grid-cols-[80%_20%] '>
 
-
-
-            <div className='flex items-start  '>
-              <h1></h1>
-            </div>
+            
+              <Calendar />
+            
+            
+            
             <div className='ml-auto'>
               <Card className='h-[400px] w-[300px] p-0 overflow-hidden hidden md:flex'>
                 <CardHeader className='flex bg-[#261810] h-10 p-0  w-full justify-center items-center text-white'>
