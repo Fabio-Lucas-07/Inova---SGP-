@@ -26,7 +26,7 @@ const Navbar = () => {
                 <ul className='flex gap-3 w-full items-center justify-center'>
                     <li>
                         <NavLink
-                            to="/"
+                            to="/home"
                             className={({ isActive }) =>
                                 `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 text-[#BB9877] ' : ''}`
                             }
