@@ -61,14 +61,14 @@ const Navbar = () => {
                         <AlertDialogTrigger asChild>
                             <Button className='text-[15px] font-normal hover:cursor-pointer bg-transparent border-none rounded-md hover:bg-white/10 p-2 transition-all duration-300'>Sair</Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className='bg-[#261810] border-none text-white'>
+                        <AlertDialogContent className='bg-[#BF9B7A] border-none text-white'>
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Você deseja mesmo sair?</AlertDialogTitle>
 
                             </AlertDialogHeader>
-                            <AlertDialogFooter className='bg-[#261810] border-none text-black'>
-                                <AlertDialogCancel className='hover:cursor-pointer bg-[#261810] border-none'>Não</AlertDialogCancel>
-                                <AlertDialogAction className='hover:cursor-pointer'
+                            <AlertDialogFooter className='bg-[#BF9B7A] border-none text-black'>
+                                <AlertDialogCancel className='hover:cursor-pointer border-none'>Não</AlertDialogCancel>
+                                <AlertDialogAction className='hover:cursor-pointer '
                                     onClick={() => {
                                         navigate('/login')
                                     }}

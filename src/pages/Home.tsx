@@ -18,38 +18,25 @@ const Home = () => {
       <div className='p-8 text-[25px]'>
 
         <div className='grid grid-rows-[min-content_1fr] gap-4 '>
-
-          <div className='grid grid-cols-2 pb-8 h-20'>
-            <h1>Agenda de hoje</h1>
-            <div className='flex justify-end '>
-              <Button className='bg-[#5B2813] font-normal w-[300px] h-10 hover:cursor-pointer'><Plus />Novo Agendamento</Button>
-            </div>
-          </div>
-
+     
           <div className='flex grid grid-cols-[80%_20%] '>
 
             
               <Calendar />
-            
-            
-            
+          
             <div className='ml-auto'>
               <Card className='h-[400px] w-[300px] p-0 overflow-hidden hidden md:flex'>
-                <CardHeader className='flex bg-[#261810] h-10 p-0  w-full justify-center items-center text-white'>
-                  <h1>Próximas Consultas</h1>
+                <CardHeader className='flex bg-[#261810] h-auto p-3  w-full justify-center items-center  text-white'>
+                  <h1 className='text-[20px]'>Próximas Consultas</h1>
                 </CardHeader>
 
                 <CardContent className="p-4">
-
                   ...
                 </CardContent>
-
               </Card>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   )
