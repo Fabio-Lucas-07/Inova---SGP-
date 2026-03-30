@@ -70,7 +70,7 @@ const Navbar = () => {
                                 <AlertDialogCancel className='hover:cursor-pointer border-none'>Não</AlertDialogCancel>
                                 <AlertDialogAction className='hover:cursor-pointer '
                                     onClick={() => {
-                                        navigate('/login')
+                                        navigate('/')
                                     }}
                                 >
                                     Sim

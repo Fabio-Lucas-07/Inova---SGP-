@@ -14,7 +14,7 @@ const Login = () => {
 
   const verificalogin = () => {
     if(login === 'admin' && senha === 'admin'){
-      navigate('/')
+      navigate('/home')
     }else{
       setAlert('Login ou senha incorretos')
     }
