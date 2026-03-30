@@ -22,7 +22,7 @@ const Login = () => {
   }
 
   return (
-    <div className='h-screen w-full flex flex-col items-center justify-center'>
+    <div className='h-screen w-full flex flex-col items-center justify-center bg-[#DFC4A4]'>
       <Card className='bg-[#261810] h-auto w-100 p-10'>
         <CardHeader>
           <h1 className='text-white text-[25px] font-semibold mx-auto'>Login</h1>
@@ -50,7 +50,6 @@ const Login = () => {
           onClick={() => {verificalogin()}}
           className='bg-white text-black hover:cursor-pointer hover:bg-gray-500 mt-1 w-35 h-10 ml-auto mr-auto'>Entrar</Button>
       </Card>
-      <h1>debug ${login}// ${senha}</h1>
     </div>
   )
 }

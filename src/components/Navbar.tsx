@@ -28,7 +28,7 @@ const Navbar = () => {
                         <NavLink
                             to="/"
                             className={({ isActive }) =>
-                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 ' : ''}`
+                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 text-[#BB9877] ' : ''}`
                             }
                         >
                             Início
@@ -38,7 +38,7 @@ const Navbar = () => {
                         <NavLink
                             to="/clientes"
                             className={({ isActive }) =>
-                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 ' : ''}`
+                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 text-[#BB9877] ' : ''}`
                             }
                         >
                             Meus Clientes
@@ -48,7 +48,7 @@ const Navbar = () => {
                         <NavLink
                             to="/prontuarios"
                             className={({ isActive }) =>
-                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 ' : ''}`
+                                `p-2 rounded-md transition-all duration-300 hover:bg-white/10 ${isActive ? 'bg-white/20 text-[#BB9877] ' : ''}`
                             }
                         >
                             Prontuários
@@ -57,18 +57,18 @@ const Navbar = () => {
                 </ul>
                 <div className='w-full flex justify-end'>
 
-                    <AlertDialog >
+                    <AlertDialog>
                         <AlertDialogTrigger asChild>
                             <Button className='text-[15px] font-normal hover:cursor-pointer bg-transparent border-none rounded-md hover:bg-white/10 p-2 transition-all duration-300'>Sair</Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className='bg-[#261810] border-none text-white'>
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Você deseja mesmo sair?</AlertDialogTitle>
 
                             </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogCancel>Não</AlertDialogCancel>
-                                <AlertDialogAction
+                            <AlertDialogFooter className='bg-[#261810] border-none text-black'>
+                                <AlertDialogCancel className='hover:cursor-pointer bg-[#261810] border-none'>Não</AlertDialogCancel>
+                                <AlertDialogAction className='hover:cursor-pointer'
                                     onClick={() => {
                                         navigate('/login')
                                     }}
