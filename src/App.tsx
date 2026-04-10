@@ -11,6 +11,8 @@ import Prontuários from './pages/Prontuários.tsx'
 import Clientes from './pages/Clientes.tsx'
 import  Layout  from './components/Layout.tsx'
 import Calendario from './components/calendario/Calendario.tsx'
+import Testes from './pages/Testes.tsx'
+
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login/>}/>
+        <Route path="/testes" element={<Testes/>}/>
+        
         <Route element={<Layout/>}>
           <Route path="/home" element={<Home/>}/>
           <Route path="/clientes" element={<Clientes/>}/>

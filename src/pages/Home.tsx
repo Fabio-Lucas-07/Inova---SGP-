@@ -17,14 +17,15 @@ const Home = () => {
       </div>
       <div className='p-8 text-[25px]'>
 
-        <div className='grid grid-rows-[min-content_1fr] gap-4 '>
+        <div className='grid grid-rows-[min-content_1fr] max-[1400]:grid-cols-1 gap-4 '>
      
-          <div className='flex grid grid-cols-[80%_20%] '>
+          
 
             
+            <div className='grid grid-cols-[80%_20%] max-[1420px]:grid-cols-1 max-[1420px]:gap-30  gap-4'>
               <Calendar />
           
-            <div className='ml-auto'>
+              <div className=' ml-auto max-[1400px]:mr-auto max-[1400px]:ml-0'>
               <Card className='h-[400px] w-[300px] p-0 overflow-hidden hidden md:flex'>
                 <CardHeader className='flex bg-[#261810] h-auto p-3  w-full justify-center items-center  text-white'>
                   <h1 className='text-[20px]'>Próximas Consultas</h1>
@@ -35,7 +36,10 @@ const Home = () => {
                 </CardContent>
               </Card>
             </div>
-          </div>
+            
+            
+            </div>
+          
         </div>
       </div>
     </div>
