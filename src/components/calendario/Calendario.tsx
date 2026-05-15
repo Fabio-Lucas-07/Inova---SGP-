@@ -61,6 +61,19 @@ const Calendario = ({ events, setEvents }) => {
   const [dataAtual, setDataAtual] = useState(moment().toDate())
   const [visualizacaoAtual, setVisualizacaoAtual] = useState(Views.MONTH)
 
+  // Função para aplicar a cor marrom escuro customizada nos cards do calendário
+  const customEventPropGetter = (event) => {
+    return {
+      style: {
+        backgroundColor: '#5B2814',
+        color: '#F1E1CA',
+        borderRadius: '6px',
+        border: 'none',
+        display: 'block'
+      }
+    }
+  }
+
   const agendar = (e) => {
     e.preventDefault();
 
@@ -83,7 +96,7 @@ const Calendario = ({ events, setEvents }) => {
         start: dataInicio,
         end: dataFim,
         desc: descricao,
-        color: 'blue',
+        color: 'marrom', // Identificador alterado
         tipo: 'Novo Agendamento'
       };
 
@@ -119,7 +132,7 @@ const Calendario = ({ events, setEvents }) => {
 
   return (
     <div>
-      {/* DESKTOP VIEW */}
+      
       <div className='calendar hidden md:block'>
         <div className='grid grid-cols-2 pb-8 h-20'>
           <h1>Agenda de hoje</h1>
@@ -196,11 +209,12 @@ const Calendario = ({ events, setEvents }) => {
             onEventResize={aoRedimensionarEvento}
             selectable={true}
             onSelectEvent={aoClicarNoEvento}
+            eventPropGetter={customEventPropGetter}
           />
         </div>
       </div>
 
-      {/* MOBILE VIEW */}
+      
       <div className='md:hidden'>
         <Dialog open={dialogMB} onOpenChange={OpenDialogMB}>
           <DialogTrigger asChild>
@@ -271,11 +285,12 @@ const Calendario = ({ events, setEvents }) => {
             onEventDrop={aoMoverEvento}
             onEventResize={aoRedimensionarEvento}
             onSelectEvent={aoClicarNoEvento}
+            eventPropGetter={customEventPropGetter}
           />
         </div>
       </div>
 
-      {/* DIALOG DETALHES DO EVENTO */}
+      
       <Dialog open={dialogDetalhes} onOpenChange={setDialogDetalhes}>
         <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
           <DialogHeader>

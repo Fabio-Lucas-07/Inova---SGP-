@@ -35,7 +35,7 @@ const Navbar = () => {
 
 
   
-  // Função para pegar o título da página atual
+ 
   const getPageTitle = () => {
     const current = navLinks.find(link => link.to === location.pathname);
     return current ? current.label : "Dashboard";
@@ -43,10 +43,10 @@ const Navbar = () => {
 
   return (
     <>
-      {/* DESKTOP */}
+     
       <div className='hidden md:flex sticky top-0 z-50 w-full h-15 bg-[#261810] items-center px-6 text-white shadow-md'>
         <div className='grid grid-cols-3 w-full items-center'>
-          <h1 className='font-bold text-lg'>Gerenciamento de Prontuários</h1>
+          <h1 className='font-bold text-lg'>Sistema Gerenciamento de Prontuários</h1>
           
           <ul className='flex gap-4 justify-center'>
             {navLinks.map((link) => (
@@ -70,13 +70,13 @@ const Navbar = () => {
               <AlertDialogTrigger asChild>
                 <Button variant="ghost" className='hover:bg-white/10 text-white'>Sair</Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className='bg-[#BF9B7A] border-none text-white'>
+              <AlertDialogContent className='border-none text-black'>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Você deseja mesmo sair?</AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className='border-none bg-white/20 text-white hover:bg-white/30'>Não</AlertDialogCancel>
-                  <AlertDialogAction className='bg-red-600 hover:bg-red-700' onClick={() => navigate('/')}>
+                  <AlertDialogCancel className='border-none bg-red-500  text-black hover:bg-red-500/30'>Não</AlertDialogCancel>
+                  <AlertDialogAction className='bg-black hover:bg-zinc-700' onClick={() => navigate('/')}>
                     Sim
                   </AlertDialogAction>
                 </AlertDialogFooter>

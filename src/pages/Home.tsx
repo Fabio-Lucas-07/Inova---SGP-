@@ -5,7 +5,6 @@ import { Card, CardHeader, CardContent } from '../components/ui/card'
 import { Plus } from 'lucide-react'
 import Calendar from '../components/calendario/Calendario.tsx'
 
-
 const consultasIniciais = [
   {
     id: 1,
@@ -60,9 +59,8 @@ const Home = () => {
   const proximasConsultas = getProximasConsultas();
 
   return (
-    <div className='w-full h-screen flex flex-col bg-[#FDFBF7]'>
+    <div className='w-full min-h-screen flex flex-col bg-[#FDFBF7]'>
       
-
       <div className='bg-gradient-to-r from-[#F1E1CA] to-[#DFC4A4] h-auto w-full p-6 shadow-sm border-b border-[#D5B99A]/30'>
         <h1 className='text-[28px] font-bold text-[#261810] tracking-tight'>Bem Vindo(a)!</h1>
         <p className='text-[16px] text-[#4A3224] mt-1 font-medium'>
@@ -70,19 +68,19 @@ const Home = () => {
         </p>
       </div>
 
-      <div className='p-8 text-[25px]'>
-        <div className='grid grid-rows-[min-content_1fr] max-[1400]:grid-cols-1 gap-4'>
+      <div className='p-8 text-[25px] flex-1'>
+        <div className='flex flex-col gap-4'>
           
-          <div className='grid grid-cols-[80%_20%] max-[1420px]:grid-cols-1 max-[1420px]:gap-10 gap-6'>
+          <div className='grid grid-cols-1 xl:grid-cols-[1fr_300px] gap-8'>
             
-            <Calendar events={events} setEvents={setEvents} />
+            <div className='min-w-0 overflow-x-auto'>
+              <Calendar events={events} setEvents={setEvents} />
+            </div>
         
-            <div className='ml-auto max-[1400px]:mr-auto max-[1400px]:ml-0'>
+            <div className='flex justify-center xl:justify-end'>
               
-  
-              <Card className='h-[400px] w-[300px] p-0 overflow-hidden  md:flex flex-col bg-[#FAF5EE] border-none shadow-xl rounded-xl'>
+              <Card className='h-[400px] w-full max-w-[300px] p-0 overflow-hidden flex flex-col bg-[#FAF5EE] border-none shadow-xl rounded-xl'>
                 
-                {/* CABEÇALHO DO CARD */}
                 <CardHeader className='flex bg-[#261810] h-auto p-4 w-full justify-center items-center text-[#F1E1CA] shadow-md z-10'>
                   <h1 className='text-[18px] font-semibold tracking-wide'>Próximas Consultas</h1>
                 </CardHeader>

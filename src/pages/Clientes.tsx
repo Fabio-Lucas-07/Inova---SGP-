@@ -24,11 +24,11 @@ const Clientes = () => {
   const [clientes, setClientes] = useState(clientesMock)
   const [busca, setBusca] = useState('')
   
-  // Estados para Edição
+  
   const [modalEditarAberto, setModalEditarAberto] = useState(false)
   const [clienteEditando, setClienteEditando] = useState(null)
 
-  // Estados para Novo Cliente
+ 
   const [modalNovoAberto, setModalNovoAberto] = useState(false)
   const [novoCliente, setNovoCliente] = useState(estadoInicialNovoCliente)
 
@@ -39,7 +39,7 @@ const Clientes = () => {
     }
   }
 
-  // Lógica de Edição
+
   const abrirModalEditar = (cliente) => {
     setClienteEditando({ ...cliente }) 
     setModalEditarAberto(true)
@@ -59,7 +59,7 @@ const Clientes = () => {
     setClienteEditando(null)
   }
 
-  // Lógica de Adição
+ 
   const abrirModalNovo = () => {
     setNovoCliente(estadoInicialNovoCliente)
     setModalNovoAberto(true)
@@ -74,7 +74,7 @@ const Clientes = () => {
   }
 
   const salvarNovoCliente = () => {
-    // Validação básica para não adicionar cliente sem nome
+    
     if (!novoCliente.nome.trim()) {
       alert("O nome do cliente é obrigatório.")
       return
@@ -100,7 +100,7 @@ const Clientes = () => {
   return (
     <div className='w-full min-h-screen flex flex-col bg-[#FDFBF7]'>
       
-      {/* Cabeçalho e Busca */}
+      
       <div className='bg-gradient-to-r from-[#F1E1CA] to-[#DFC4A4] h-auto w-full p-6 shadow-sm border-b border-[#D5B99A]/30 flex flex-col md:flex-row justify-between md:items-center gap-4'>
         <div>
           <h1 className='text-[28px] font-bold text-[#261810] tracking-tight'>Clientes</h1>
@@ -131,7 +131,7 @@ const Clientes = () => {
         </div>
       </div>
 
-      {/* Listagem de Clientes */}
+      
       <div className='p-8 flex-1'>
         <div className='max-w-[1200px] mx-auto'>
           
@@ -216,7 +216,7 @@ const Clientes = () => {
         </div>
       </div>
 
-      {/* MODAL - EDITAR CLIENTE */}
+     
       <Dialog open={modalEditarAberto} onOpenChange={setModalEditarAberto}>
         <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
           <DialogHeader>
@@ -297,7 +297,7 @@ const Clientes = () => {
         </DialogContent>
       </Dialog>
 
-      {/* MODAL - NOVO CLIENTE */}
+      
       <Dialog open={modalNovoAberto} onOpenChange={setModalNovoAberto}>
         <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
           <DialogHeader>
