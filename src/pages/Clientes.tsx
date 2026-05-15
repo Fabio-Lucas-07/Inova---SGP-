@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from '@/components/ui/button' 
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Search, Plus, User, Phone, Mail, Edit3, Trash2, MapPin, Calendar as CalendarIcon } from 'lucide-react'
+import { Search, Plus, User, Phone, Mail, Edit3, Trash2, MapPin, Calendar as CalendarIcon, UserPlus } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 
 const clientesMock = [
@@ -12,12 +12,25 @@ const clientesMock = [
   { id: 4, nome: 'Ana Beatriz Alves', email: 'ana.beatriz@email.com', telefone: '(11) 98888-2222', dataNasc: '30/01/1995', cidade: 'Rio de Janeiro, RJ' },
 ]
 
+const estadoInicialNovoCliente = {
+  nome: '',
+  email: '',
+  telefone: '',
+  dataNasc: '',
+  cidade: ''
+}
+
 const Clientes = () => {
   const [clientes, setClientes] = useState(clientesMock)
   const [busca, setBusca] = useState('')
   
+  // Estados para Edição
   const [modalEditarAberto, setModalEditarAberto] = useState(false)
   const [clienteEditando, setClienteEditando] = useState(null)
+
+  // Estados para Novo Cliente
+  const [modalNovoAberto, setModalNovoAberto] = useState(false)
+  const [novoCliente, setNovoCliente] = useState(estadoInicialNovoCliente)
 
   const removerCliente = (id) => {
     if (window.confirm("Tem certeza que deseja remover este cliente?")) {
@@ -26,12 +39,13 @@ const Clientes = () => {
     }
   }
 
-
+  // Lógica de Edição
   const abrirModalEditar = (cliente) => {
     setClienteEditando({ ...cliente }) 
     setModalEditarAberto(true)
   }
-  const handleInputChange = (e) => {
+
+  const handleEditInputChange = (e) => {
     const { name, value } = e.target
     setClienteEditando(prev => ({
       ...prev,
@@ -39,11 +53,44 @@ const Clientes = () => {
     }))
   }
 
-
   const salvarEdicao = () => {
     setClientes(clientes.map(c => c.id === clienteEditando.id ? clienteEditando : c))
     setModalEditarAberto(false)
     setClienteEditando(null)
+  }
+
+  // Lógica de Adição
+  const abrirModalNovo = () => {
+    setNovoCliente(estadoInicialNovoCliente)
+    setModalNovoAberto(true)
+  }
+
+  const handleNovoInputChange = (e) => {
+    const { name, value } = e.target
+    setNovoCliente(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const salvarNovoCliente = () => {
+    // Validação básica para não adicionar cliente sem nome
+    if (!novoCliente.nome.trim()) {
+      alert("O nome do cliente é obrigatório.")
+      return
+    }
+
+    // Gera um novo ID baseado no maior ID existente (ou 1 se a lista estiver vazia)
+    const novoId = clientes.length > 0 ? Math.max(...clientes.map(c => c.id)) + 1 : 1
+    
+    const clienteParaAdicionar = {
+      ...novoCliente,
+      id: novoId
+    }
+
+    setClientes([...clientes, clienteParaAdicionar])
+    setModalNovoAberto(false)
+    setNovoCliente(estadoInicialNovoCliente)
   }
 
   const clientesFiltrados = clientes.filter((cliente) =>
@@ -53,7 +100,7 @@ const Clientes = () => {
   return (
     <div className='w-full min-h-screen flex flex-col bg-[#FDFBF7]'>
       
-  
+      {/* Cabeçalho e Busca */}
       <div className='bg-gradient-to-r from-[#F1E1CA] to-[#DFC4A4] h-auto w-full p-6 shadow-sm border-b border-[#D5B99A]/30 flex flex-col md:flex-row justify-between md:items-center gap-4'>
         <div>
           <h1 className='text-[28px] font-bold text-[#261810] tracking-tight'>Clientes</h1>
@@ -74,14 +121,17 @@ const Clientes = () => {
             />
           </div>
           
-          <Button className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA] border-none shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+          <Button 
+            onClick={abrirModalNovo}
+            className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA] border-none shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
+          >
             <Plus size={20} />
             Novo Cliente
           </Button>
         </div>
       </div>
 
-  
+      {/* Listagem de Clientes */}
       <div className='p-8 flex-1'>
         <div className='max-w-[1200px] mx-auto'>
           
@@ -166,7 +216,7 @@ const Clientes = () => {
         </div>
       </div>
 
-  
+      {/* MODAL - EDITAR CLIENTE */}
       <Dialog open={modalEditarAberto} onOpenChange={setModalEditarAberto}>
         <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
           <DialogHeader>
@@ -183,7 +233,7 @@ const Clientes = () => {
                 <Input 
                   name="nome"
                   value={clienteEditando.nome} 
-                  onChange={handleInputChange}
+                  onChange={handleEditInputChange}
                   className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
                 />
               </div>
@@ -193,7 +243,7 @@ const Clientes = () => {
                   name="email"
                   type="email"
                   value={clienteEditando.email} 
-                  onChange={handleInputChange}
+                  onChange={handleEditInputChange}
                   className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
                 />
               </div>
@@ -203,7 +253,7 @@ const Clientes = () => {
                   <Input 
                     name="telefone"
                     value={clienteEditando.telefone} 
-                    onChange={handleInputChange}
+                    onChange={handleEditInputChange}
                     className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
                   />
                 </div>
@@ -212,7 +262,7 @@ const Clientes = () => {
                   <Input 
                     name="dataNasc"
                     value={clienteEditando.dataNasc} 
-                    onChange={handleInputChange}
+                    onChange={handleEditInputChange}
                     className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
                   />
                 </div>
@@ -222,7 +272,7 @@ const Clientes = () => {
                 <Input 
                   name="cidade"
                   value={clienteEditando.cidade} 
-                  onChange={handleInputChange}
+                  onChange={handleEditInputChange}
                   className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
                 />
               </div>
@@ -242,6 +292,90 @@ const Clientes = () => {
               className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA]"
             >
               Salvar Alterações
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* MODAL - NOVO CLIENTE */}
+      <Dialog open={modalNovoAberto} onOpenChange={setModalNovoAberto}>
+        <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
+          <DialogHeader>
+            <DialogTitle className="text-[22px] font-bold text-[#261810] flex items-center gap-2">
+              <UserPlus className="text-[#5B2814]" size={24} />
+              Novo Cliente
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <label className="text-[14px] font-medium text-[#4A3224]">Nome Completo *</label>
+              <Input 
+                name="nome"
+                placeholder="Ex: Maria Joaquina"
+                value={novoCliente.nome} 
+                onChange={handleNovoInputChange}
+                className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-[14px] font-medium text-[#4A3224]">Email</label>
+              <Input 
+                name="email"
+                type="email"
+                placeholder="exemplo@email.com"
+                value={novoCliente.email} 
+                onChange={handleNovoInputChange}
+                className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <label className="text-[14px] font-medium text-[#4A3224]">Telefone</label>
+                <Input 
+                  name="telefone"
+                  placeholder="(00) 00000-0000"
+                  value={novoCliente.telefone} 
+                  onChange={handleNovoInputChange}
+                  className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
+                />
+              </div>
+              <div className="grid gap-2">
+                <label className="text-[14px] font-medium text-[#4A3224]">Data Nasc.</label>
+                <Input 
+                  name="dataNasc"
+                  placeholder="DD/MM/AAAA"
+                  value={novoCliente.dataNasc} 
+                  onChange={handleNovoInputChange}
+                  className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
+                />
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <label className="text-[14px] font-medium text-[#4A3224]">Cidade/UF</label>
+              <Input 
+                name="cidade"
+                placeholder="Ex: São Paulo, SP"
+                value={novoCliente.cidade} 
+                onChange={handleNovoInputChange}
+                className="bg-white border-[#D5B99A] focus:ring-[#5B2814]"
+              />
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <Button 
+              variant="ghost" 
+              onClick={() => setModalNovoAberto(false)}
+              className="text-[#7A4B3A] hover:bg-[#FAF5EE]"
+            >
+              Cancelar
+            </Button>
+            <Button 
+              onClick={salvarNovoCliente}
+              className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA]"
+            >
+              Adicionar Cliente
             </Button>
           </DialogFooter>
         </DialogContent>

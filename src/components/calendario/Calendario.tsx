@@ -7,7 +7,7 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './Calendario.css'
 import { Button } from '../ui/button'
-import { Plus } from 'lucide-react'
+import { FileText, Plus } from 'lucide-react'
 import {
   Dialog,
   DialogClose,
@@ -18,7 +18,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -120,48 +119,62 @@ const Calendario = ({ events, setEvents }) => {
 
   return (
     <div>
+      {/* DESKTOP VIEW */}
       <div className='calendar hidden md:block'>
         <div className='grid grid-cols-2 pb-8 h-20'>
           <h1>Agenda de hoje</h1>
           <div className='flex justify-end '>
             <Dialog open={dialog} onOpenChange={OpenDialog}>
               <DialogTrigger asChild>
-                <Button className='bg-[#5B2814] rounded-md h-10 text-[20px] hover:cursor-pointer '>
-                  <Plus />Novo Agendamento
+                <Button className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA] border-none shadow-md hover:shadow-lg transition-all rounded-md h-10 text-[16px] flex items-center gap-2 cursor-pointer">
+                  <Plus size={20} /> Novo Agendamento
                 </Button>
               </DialogTrigger>
 
-              <DialogContent className="sm:max-w-sm bg-[#261810] text-[#F2E0C9] scale-120">
+              <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
                 <form onSubmit={agendar}>
                   <DialogHeader>
-                    <DialogTitle>Novo Agendamento</DialogTitle>
-                    <DialogDescription className='text-[#F2E0C9]'>
+                    <DialogTitle className="text-[22px] font-bold text-[#261810] flex items-center gap-2">
+                      <Plus className="text-[#5B2814]" size={24} />
+                      Novo Agendamento
+                    </DialogTitle>
+                    <DialogDescription className='text-[#A67B66]'>
                       Preencha as informações para adicionar um novo agendamento.
                     </DialogDescription>
                   </DialogHeader>
-                  <FieldGroup>
-                    <Field>
-                      <Label htmlFor="nome">Nome</Label>
-                      <Input id="nome" onChange={(e) => setNome(e.target.value)} value={nome} placeholder="Ex: Joao da Silva" className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                    </Field>
-                    <Field>
-                      <Label htmlFor="dia">Dia</Label>
-                      <Input id="dia" type="date" onChange={(e) => setDia(e.target.value)} value={dia} className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                    </Field>
-                    <Field>
-                      <Label htmlFor="horario">Horário de Início</Label>
-                      <Input id="horario" type="time" onChange={(e) => setHorario(e.target.value)} value={horario} className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                    </Field>
-                    <Field>
-                      <Label htmlFor="descricao">Descrição</Label>
-                      <Input id="descricao" onChange={(e) => setDescricao(e.target.value)} value={descricao} className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                    </Field>
-                  </FieldGroup>
-                  <DialogFooter className="mt-4">
+                  
+                  <div className="grid gap-4 py-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="nome" className="text-[14px] font-medium text-[#4A3224]">Nome</Label>
+                      <Input id="nome" onChange={(e) => setNome(e.target.value)} value={nome} placeholder="Ex: Joao da Silva" className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="dia" className="text-[14px] font-medium text-[#4A3224]">Dia</Label>
+                        <Input id="dia" type="date" onChange={(e) => setDia(e.target.value)} value={dia} className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                      </div>
+                      <div className="grid gap-2">
+                        <Label htmlFor="horario" className="text-[14px] font-medium text-[#4A3224]">Horário de Início</Label>
+                        <Input id="horario" type="time" onChange={(e) => setHorario(e.target.value)} value={horario} className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                      </div>
+                    </div>
+
+                    <div className="grid gap-2">
+                      <Label htmlFor="descricao" className="text-[14px] font-medium text-[#4A3224]">Descrição</Label>
+                      <Input id="descricao" onChange={(e) => setDescricao(e.target.value)} value={descricao} placeholder="Detalhes adicionais..." className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                    </div>
+                  </div>
+
+                  <DialogFooter className="mt-2">
                     <DialogClose asChild>
-                      <Button type="button" className='hover:cursor-pointer'>Cancelar</Button>
+                      <Button type="button" variant="ghost" className="text-[#7A4B3A] hover:bg-[#FAF5EE] cursor-pointer">
+                        Cancelar
+                      </Button>
                     </DialogClose>
-                    <Button type="submit" className='hover:cursor-pointer'>Agendar</Button>
+                    <Button type="submit" className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA] cursor-pointer">
+                      Agendar
+                    </Button>
                   </DialogFooter>
                 </form>
               </DialogContent>
@@ -187,45 +200,59 @@ const Calendario = ({ events, setEvents }) => {
         </div>
       </div>
 
+      {/* MOBILE VIEW */}
       <div className='md:hidden'>
         <Dialog open={dialogMB} onOpenChange={OpenDialogMB}>
           <DialogTrigger asChild>
-            <Button className='fixed bottom-8 right-8 z-50 bg-[#5B2814] rounded-full h-14 w-14 p-4 text-[20px] hover:cursor-pointer shadow-lg'>
+            <Button className='fixed bottom-8 right-8 z-50 bg-[#5B2814] rounded-full h-14 w-14 p-4 text-[20px] text-[#F1E1CA] hover:bg-[#4A2010] cursor-pointer shadow-lg transition-all'>
               <Plus />
             </Button>
           </DialogTrigger>
 
-          <DialogContent className="sm:max-w-sm bg-[#261810] text-[#F2E0C9] ">
+          <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
             <form onSubmit={agendar}>
               <DialogHeader>
-                <DialogTitle>Novo Agendamento</DialogTitle>
-                <DialogDescription className='text-[#F2E0C9]'>
+                <DialogTitle className="text-[22px] font-bold text-[#261810] flex items-center gap-2">
+                  <Plus className="text-[#5B2814]" size={24} />
+                  Novo Agendamento
+                </DialogTitle>
+                <DialogDescription className='text-[#A67B66]'>
                   Preencha as informações para adicionar um novo agendamento.
                 </DialogDescription>
               </DialogHeader>
-              <FieldGroup>
-                <Field>
-                  <Label htmlFor="nome">Nome</Label>
-                  <Input id="nome" onChange={(e) => setNome(e.target.value)} value={nome} placeholder="Ex: Joao da Silva" className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                </Field>
-                <Field>
-                  <Label htmlFor="dia">Dia</Label>
-                  <Input id="dia" type="date" onChange={(e) => setDia(e.target.value)} value={dia} className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                </Field>
-                <Field>
-                  <Label htmlFor="horario">Horário de Início</Label>
-                  <Input id="horario" type="time" onChange={(e) => setHorario(e.target.value)} value={horario} className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                </Field>
-                <Field>
-                  <Label htmlFor="descricao">Descrição</Label>
-                  <Input id="descricao" onChange={(e) => setDescricao(e.target.value)} value={descricao} className='border-[#F2E0C9] bg-[#F2E0C9] text-black' />
-                </Field>
-              </FieldGroup>
-              <DialogFooter className="mt-4">
+              
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="nomeMB" className="text-[14px] font-medium text-[#4A3224]">Nome</Label>
+                  <Input id="nomeMB" onChange={(e) => setNome(e.target.value)} value={nome} placeholder="Ex: Joao da Silva" className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="diaMB" className="text-[14px] font-medium text-[#4A3224]">Dia</Label>
+                    <Input id="diaMB" type="date" onChange={(e) => setDia(e.target.value)} value={dia} className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="horarioMB" className="text-[14px] font-medium text-[#4A3224]">Horário de Início</Label>
+                    <Input id="horarioMB" type="time" onChange={(e) => setHorario(e.target.value)} value={horario} className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="descricaoMB" className="text-[14px] font-medium text-[#4A3224]">Descrição</Label>
+                  <Input id="descricaoMB" onChange={(e) => setDescricao(e.target.value)} value={descricao} placeholder="Detalhes adicionais..." className="bg-white border-[#D5B99A] focus:ring-[#5B2814] text-black" />
+                </div>
+              </div>
+
+              <DialogFooter className="mt-2">
                 <DialogClose asChild>
-                  <Button type="button" className='hover:cursor-pointer'>Cancelar</Button>
+                  <Button type="button" variant="ghost" className="text-[#7A4B3A] hover:bg-[#FAF5EE] cursor-pointer">
+                    Cancelar
+                  </Button>
                 </DialogClose>
-                <Button type="submit" className='hover:cursor-pointer'>Agendar</Button>
+                <Button type="submit" className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA] cursor-pointer">
+                  Agendar
+                </Button>
               </DialogFooter>
             </form>
           </DialogContent>
@@ -248,43 +275,51 @@ const Calendario = ({ events, setEvents }) => {
         </div>
       </div>
 
+      {/* DIALOG DETALHES DO EVENTO */}
       <Dialog open={dialogDetalhes} onOpenChange={setDialogDetalhes}>
-        <DialogContent className="sm:max-w-sm bg-[#261810] text-[#F2E0C9]">
+        <DialogContent className="sm:max-w-[425px] bg-[#FDFBF7] border-[#D5B99A]">
           <DialogHeader>
-            <DialogTitle>Detalhes da Consulta</DialogTitle>
+            <DialogTitle className="text-[22px] font-bold text-[#261810] flex items-center gap-2">
+              <FileText className="text-[#5B2814]" size={24} />
+              Detalhes da Consulta
+            </DialogTitle>
           </DialogHeader>
           
           {eventoSelecionado && (
-            <div className="flex flex-col gap-3 mt-4">
-              <div>
-                <span className="font-bold text-gray-300">Paciente/Nome:</span>
-                <p className="text-lg">{eventoSelecionado.title}</p>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-1 border-b border-[#F1E1CA] pb-3">
+                <span className="text-[14px] font-medium text-[#A67B66]">Paciente/Nome</span>
+                <p className="text-[18px] font-bold text-[#261810]">{eventoSelecionado.title}</p>
               </div>
               
-              <div>
-                <span className="font-bold text-gray-300">Data:</span>
-                <p>{moment(eventoSelecionado.start).format('DD/MM/YYYY')}</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-1">
+                  <span className="text-[14px] font-medium text-[#A67B66]">Data</span>
+                  <p className="text-[16px] font-medium text-[#4A3224]">
+                    {moment(eventoSelecionado.start).format('DD/MM/YYYY')}
+                  </p>
+                </div>
+
+                <div className="grid gap-1">
+                  <span className="text-[14px] font-medium text-[#A67B66]">Horário</span>
+                  <p className="text-[16px] font-medium text-[#4A3224]">
+                    {moment(eventoSelecionado.start).format('HH:mm')} às {moment(eventoSelecionado.end).format('HH:mm')}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <span className="font-bold text-gray-300">Horário:</span>
-                <p>
-                  {moment(eventoSelecionado.start).format('HH:mm')} às {moment(eventoSelecionado.end).format('HH:mm')}
-                </p>
-              </div>
-
-              <div>
-                <span className="font-bold text-gray-300">Descrição:</span>
-                <p className="p-2 mt-1 bg-[#1a100b] rounded-md min-h-[60px]">
+              <div className="grid gap-1 mt-2">
+                <span className="text-[14px] font-medium text-[#A67B66]">Descrição</span>
+                <p className="p-3 mt-1 bg-white border border-[#D5B99A] text-[#4A3224] rounded-md min-h-[80px] shadow-sm text-[15px]">
                   {eventoSelecionado.desc ? eventoSelecionado.desc : 'Nenhuma descrição fornecida.'}
                 </p>
               </div>
             </div>
           )}
 
-          <DialogFooter className="mt-4">
+          <DialogFooter className="mt-2">
             <DialogClose asChild>
-              <Button type="button" className='bg-[#5B2814] hover:bg-[#4a1f0f] hover:cursor-pointer'>
+              <Button type="button" className="bg-[#5B2814] hover:bg-[#4A2010] text-[#F1E1CA] cursor-pointer w-full sm:w-auto">
                 Fechar
               </Button>
             </DialogClose>
